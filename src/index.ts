@@ -5,13 +5,31 @@ import { Client, Message, MessageEmbed } from "discord.js";
 console.log(process.env.PREFIX);
 
 async function helpCommand(msg: Message) {
-  await msg.channel.send("Ask August for help :)");
+  await sendMessage(
+    msg,
+    `
+add x y
+multiply x y
+divide x y
+square x
+sqrt x
+lcm x y
+hcf x y
+isdivisible x y
+iscoprime x y
+isprime x
+closetprime x
+  `,
+    false,
+    true
+  );
 }
 
 async function sendMessage(
   message: Message,
   c: number | string,
-  error = false
+  error = false,
+  help = false
 ) {
   const e = new MessageEmbed()
     .setTitle(message.content)
@@ -20,6 +38,9 @@ async function sendMessage(
 
   if (error) {
     e.setColor("#FF0000");
+  }
+  if (help) {
+    e.setColor("#00FF00");
   }
 
   await message.channel.send(e);
@@ -164,6 +185,9 @@ async function main() {
 
         break;
       }
+      case "help": {
+        await helpCommand(msg);
+      }
     }
   });
 
@@ -227,7 +251,7 @@ function isCoPrime(num1: number, num2: number): string {
       return "false";
     }
   }
-  return "trye";
+  return "true";
 }
 
 function nearestPrime(num: number): number {
