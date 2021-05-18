@@ -57,11 +57,11 @@ async function main() {
     if (msg.mentions.has(client.user!)) {
       await helpCommand(msg);
     }
-    if (!shouldParseMessage(process.env.PREFIX, msg)) {
+    if (!shouldParseMessage(process.env.PREFIX!, msg)) {
       return;
     }
 
-    const { args, command } = getCommandAndArgs(process.env.PREFIX, msg);
+    const { args, command } = getCommandAndArgs(process.env.PREFIX!, msg);
 
     switch (command) {
       case "isdivisible": {
